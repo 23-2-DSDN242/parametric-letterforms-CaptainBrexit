@@ -2,39 +2,50 @@ const canvasWidth = 960;
 const canvasHeight = 500;
 
 /*
- * my three variable per letter are:
- *
-   size: radius of the second circle (in pixels)
-   offsetx: x offset (in pixels) of the second circle
-            relative to the first one
-   offsety: y offset (in pixels) of the second circle
-            relative to the first one
- *
+ I have way too many parameters
+ And the ones you can see here isn't even all of them
+ They're all explained under draw_letters
  */
 
 const letterA = {
-  "size": 80,
-  "offsetx": 0,
-  "offsety": 35
+  firstRectWidth: 60,
+  firstRectHeight: 60,
+  firstRectXOffset: -80,
+  firstRectYOffset: -80,
+
+  secondRectWidth: 60,
+  secondRectHeight: 100,
+  secondRectXOffset: -80,
+  secondRectYOffset: 0
 }
 
 const letterB = {
-  "size": 150,
-  "offsetx": 0,
-  "offsety": -145
+  firstRectWidth: 50,
+  firstRectHeight: 60,
+  firstRectXOffset: -80,
+  firstRectYOffset: -80,
+
+  secondRectWidth: 60,
+  secondRectHeight: 60,
+  secondRectXOffset: -80,
+  secondRectYOffset: 20,
+
+  thirdRectWidth: 20,
+  thirdRectHeight: 100,
+  thirdRectXOffset: 150,
+  thirdRectYOffset: -100
 }
 
 const letterC = {
-  "size": 100,
-  "offsetx": 30,
-  "offsety": 0
+  firstRectWidth: 80,
+  firstRectHeight: 160,
+  firstRectXOffset: -80,
+  firstRectYOffset: -80
 }
 
-const backgroundColor  = "#acf2e7";
+const backgroundColor  = "#ffffff";
 
-const darkGreen  = "#26b29d";
-const lightGreen  = "#30dfc4";
-const strokeColor  = "#0a2d27";
+const strokeColor  = "#000000";
 
 function setup () {
   // create the drawing canvas, save the canvas element
@@ -44,6 +55,7 @@ function setup () {
   // color/stroke setup
   stroke(strokeColor);
   strokeWeight(4);
+  fill(0);
 
   // with no animation, redrawing the screen is not necessary
   noLoop();
@@ -64,16 +76,56 @@ function draw () {
 }
 
 function drawLetter(posx, posy, letterData) {
-  // determine parameters for second circle
-  let size2 = letterData["size"];
-  let pos2x = posx + letterData["offsetx"];
-  let pos2y = posy + letterData["offsety"];
 
-  // draw two circles
-  fill(darkGreen);
-  ellipse(posx, posy, 150, 150);
-  fill(lightGreen);
-  ellipse(pos2x, pos2y, size2, size2);
+  let firstRectStartingX = posx + letterData["firstRectXOffset"];
+  let firstRectStartingY = posy + letterData["firstRectYOffset"];
+  let firstRectWidth = letterData["firstRectWidth"];
+  let firstRectHeight = letterData["firstRectHeight"];
+  
+  let secondRectStartingX = posx + letterData["secondRectXOffset"];
+  let secondRectStartingY = posy + letterData["secondRectYOffset"];
+  let secondRectWidth = letterData["secondRectWidth"];
+  let secondRectHeight = letterData["secondRectHeight"];
+  
+  let thirdRectStartingX = posy + letterData["thirdRectXOffset"];
+  let thirdRectStartingY = posy + letterData["thirdRectYOffset"];
+  let thirdRectWidth = letterData["thirdRectWidth"];
+  let thirdRectHeight = letterData["thirdRectHeight"];
+
+
+
+  fill(0);
+  strokeWeight(4);
+  stroke(0);
+  strokeCap(SQUARE);
+
+  line(posx-100, posy+80, posx-90, posy+100);
+  line(posx-100, posy+60, posx-80, posy+100);
+  line(posx-100, posy+40, posx-70, posy+100);
+  line(posx-100, posy+20, posx-60, posy+100);
+  line(posx-100, posy, posx-50, posy+100);
+  line(posx-100, posy-20, posx-40, posy+100);
+  line(posx-100, posy-40, posx-30, posy+100);
+  line(posx-100, posy-60, posx-20, posy+100);
+  line(posx-100, posy-80, posx-10, posy+100);
+  line(posx-100, posy-100, posx, posy+100);
+  line(posx-90, posy-100, posx, posy+80);
+  line(posx-80, posy-100, posx, posy+60);
+  line(posx-70, posy-100, posx, posy+40);
+  line(posx-60, posy-100, posx, posy+20);
+  line(posx-50, posy-100, posx, posy);
+  line(posx-40, posy-100, posx, posy-20);
+  line(posx-30, posy-100, posx, posy-40);
+  line(posx-20, posy-100, posx, posy-60);
+  line(posx-10, posy-100, posx, posy-80);
+  line(posx, posy-100, posx, posy-100);
+  
+
+  fill(255);
+  stroke(255);
+  rect(firstRectStartingX, firstRectStartingY, firstRectWidth, firstRectHeight);
+  rect(secondRectStartingX, secondRectStartingY, secondRectWidth, secondRectHeight);
+  rect(thirdRectStartingX, thirdRectStartingY, thirdRectWidth, thirdRectHeight);
 }
 
 function keyTyped() {
